@@ -8,7 +8,7 @@ data "aws_ami" "i" {
 
   filter {
     name   = "name"
-    values = ["Deep Learning AMI GPU PyTorch 2.0.? (Amazon Linux 2) ????????"]
+    values = ["Deep Learning AMI GPU PyTorch 2.0.? (Ubuntu 20.04) ????????"]
   }
 }
 
