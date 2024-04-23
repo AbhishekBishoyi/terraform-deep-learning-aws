@@ -7,7 +7,7 @@ variable "aws_region" {
 }
 
 variable "instance_type" {
-  default = "g4dn.xlarge"
+  default = "g5.xlarge"
 }
 
 variable "service" {

@@ -19,7 +19,7 @@ resource "aws_key_pair" "generated_key" {
 
 
 resource "aws_security_group" "deepLearning" {
-  name        = "${var.service}-${uuid()}"
+  name        = "${var.service}-sg"
   description = "Security group for ${title(var.service)}"
 
   ingress {
@@ -38,6 +38,22 @@ resource "aws_security_group" "deepLearning" {
     description = title(var.service)
   }
 
+  ingress {
+    description = "EFS mount target"
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTP from VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -46,7 +62,7 @@ resource "aws_security_group" "deepLearning" {
   }
 
   tags = {
-    Name      = "${var.service}-${uuid()}"
+    Name      = "${var.service}-sg"
     Service   = "${title(var.service)}"
     Terraform = "true"
   }
